@@ -1,0 +1,14 @@
+# Google Gemini 2.0 Credentials
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Alpaca Paper Trading Credentials
+APCA_API_KEY_ID=PKNUZ5YDLSN5EI333QPVOCFU33
+APCA_API_SECRET_KEY=7Y3PCp91Vucd65TxfENVuG5xiJMu5H4kRdxjdoHKeZLp
+APCA_API_BASE_URL=https://paper-api.alpaca.markets
+
+
+
+
+
+OPENROUTER KEY:
+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

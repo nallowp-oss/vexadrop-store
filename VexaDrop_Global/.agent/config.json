@@ -1,0 +1,7 @@
+{
+    "workspace_name": "VexaDrop Global",
+    "agent_policy": "Fast Mode",
+    "default_model": "Gemini 3 Pro (Low)",
+    "objective": "$0 ad-spend international e-commerce optimized for SGE",
+    "version": "1.0.0"
+}

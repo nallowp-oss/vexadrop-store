@@ -1,0 +1,63 @@
+{
+    "mcpServers": {
+        "slack": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-slack"
+            ],
+            "env": {
+                "SLACK_BOT_TOKEN": "xoxb-10610676743604-10603804984149-yXwZXTyvWqQly4XyG2n3ke5E",
+                "SLACK_APP_TOKEN": "xapp-1-A0AHNQCBBEF-10605171701926-8887404b096f106be0f4a9bd7d45e4a57d36734a6ef0049f6e132a52ee85aeed",
+                "SLACK_TEAM_ID": "T0AHYKWMVHS"
+            },
+            "description": "Mobile command layer. CEO communicates with VexaDrop agents from Slack on mobile."
+        },
+        "google-calendar": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-google-calendar"
+            ],
+            "env": {},
+            "description": "Central nervous system for COO Agent scheduling."
+        },
+        "google-search": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-google-search"
+            ],
+            "description": "AI Search (SGE) monitoring for Marketing Specialist."
+        },
+        "perplexity": {
+            "command": "perplexity-mcp",
+            "description": "Cross-reference AI Search trends."
+        },
+        "tiktok-trends": {
+            "command": "apify-tiktok-mcp",
+            "description": "Viral product scanning for Sales Specialist."
+        },
+        "netlify-vercel": {
+            "command": "deploy-mcp",
+            "description": "Free-tier deployment for Data/Operations Agent."
+        },
+        "google-stitch": {
+            "command": "stitch-mcp",
+            "description": "High-end minimalist UI generation for Creative Specialist."
+        },
+        "visual-gatekeeper": {
+            "command": "cloudinary-mcp",
+            "description": "Automated 4K upscaling and background removal."
+        }
+    },
+    "extensions": {
+        "antigravity-browser": {
+            "status": "enabled",
+            "agents": [
+                "all"
+            ],
+            "description": "Read/Write/Control Chrome for trend scraping and social management."
+        }
+    }
+}

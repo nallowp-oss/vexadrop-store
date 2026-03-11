@@ -1,0 +1,75 @@
+[
+    {
+        "name": "Neural Sync One",
+        "description": "Next-gen neural interface for seamless AI integration. Features adaptive feedback loops and bio-metric sync.",
+        "price": 499.0,
+        "category": "Wearables",
+        "tags": [
+            "Neural",
+            "AI",
+            "High-Performance"
+        ],
+        "image_url": "/assets/neural-sync.png"
+    },
+    {
+        "name": "Vexa Core Alpha",
+        "description": "The peak of portable AI compute. 100 TFLOPS of local processing in your pocket.",
+        "price": 1200.0,
+        "category": "Computing",
+        "tags": [
+            "Compute",
+            "Core",
+            "Hardware"
+        ],
+        "image_url": "/assets/vexa-core.png"
+    },
+    {
+        "name": "Omni Flow Pods",
+        "description": "Spatial audio tuned for high-performance focus and deep work states.",
+        "price": 249.0,
+        "category": "Audio",
+        "tags": [
+            "Audio",
+            "Focus",
+            "Lifestyle"
+        ],
+        "image_url": "/assets/omni-flow.png"
+    },
+    {
+        "name": "Vexa Shield Pro",
+        "description": "Ultra-slim, high-impact screen protection with biometric anti-glare.",
+        "price": 29.99,
+        "category": "Accessories",
+        "tags": [
+            "Protection",
+            "Trending",
+            "Mobile"
+        ],
+        "image_url": "/assets/liquid-shield.png"
+    },
+    {
+        "name": "Neural Mesh Puzzle",
+        "description": "Adaptive difficulty physical puzzle that interacts with Vexa-Core for cognitive training.",
+        "price": 89.0,
+        "category": "Lifestyle",
+        "tags": [
+            "Cognitive",
+            "SA-Viral",
+            "Trending"
+        ],
+        "image_url": "/assets/aura-mesh.png"
+    },
+    {
+        "name": "VexaDrop Performance Serum X",
+        "description": "Revolutionary high-performance anti-aging serum, infused with cutting-edge biotechnology for optimal skin rejuvenation and regeneration.",
+        "price": 150.0,
+        "category": "Skin Care",
+        "tags": [
+            "High-Performance",
+            "Biotech",
+            "Anti-Aging",
+            "Serum"
+        ],
+        "image_url": "https://example.com/products/performance-serum-x.jpg"
+    }
+]
