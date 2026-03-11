@@ -1,0 +1,491 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+@theme {
+  --color-premium-vibrant: #ff3366;
+  --color-premium-dark: #0a0a0a;
+  --color-premium-glass: rgba(255, 255, 255, 0.05);
+  --font-premium: "Outfit", sans-serif;
+
+  /* ── Scroll Animation Tokens ─────────────────────────────── */
+  --color-brand-base: #0F172A;
+  --color-brand-accent: #38BDF8;
+  --color-brand-secondary: #1D4ED8;
+
+  --animate-parallax-depth-bg: -2px;
+  --animate-parallax-depth-mid: -1px;
+  --animate-parallax-scale-bg: 1.4;
+  --animate-parallax-scale-mid: 1.2;
+
+  --animate-reveal-distance: 40px;
+  --animate-reveal-duration: 0.7s;
+  --animate-reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-stagger-step: 80ms;
+}
+
+body {
+  background-color: var(--color-premium-dark);
+  color: white;
+  font-family: var(--font-premium);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.glass-morphism {
+  background-color: var(--color-premium-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, #ff3366 0%, #7000ff 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CSS SCROLL-DRIVEN ANIMATIONS (GPU-accelerated, zero JS)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ────────────────────────────────────────────── */
+@keyframes scroll-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--animate-reveal-distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll-reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes scroll-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Scroll-driven utility classes ────────────────────────── */
+.scroll-reveal {
+  animation: scroll-reveal-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+
+.scroll-reveal-left {
+  animation: scroll-reveal-left linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+
+.scroll-reveal-right {
+  animation: scroll-reveal-right linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+
+.scroll-scale-in {
+  animation: scroll-scale-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+.scroll-fade-out {
+  animation: scroll-fade-out linear both;
+  animation-timeline: view();
+  animation-range: exit 0% exit 50%;
+}
+
+/* ── Parallax hero layers ─────────────────────────────────── */
+.parallax-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.parallax-layer-bg {
+  transform: translateZ(var(--animate-parallax-depth-bg)) scale(var(--animate-parallax-scale-bg));
+  will-change: transform;
+}
+
+.parallax-layer-mid {
+  transform: translateZ(var(--animate-parallax-depth-mid)) scale(var(--animate-parallax-scale-mid));
+  will-change: transform;
+}
+
+.parallax-layer-fg {
+  transform: translateZ(0);
+}
+
+/* ── Scrollytelling sticky layout ─────────────────────────── */
+.scrollytelling {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 200vh;
+  position: relative;
+}
+
+.scrollytelling-media {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.scrollytelling-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20vh 40px;
+}
+
+.scrollytelling-panel {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  animation: scroll-reveal-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+/* ── Fallback for browsers without animation-timeline ─────── */
+@supports not (animation-timeline: view()) {
+
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right,
+  .scroll-scale-in {
+    opacity: 0;
+    transform: translateY(var(--animate-reveal-distance));
+    transition: opacity var(--animate-reveal-duration) var(--animate-reveal-ease),
+      transform var(--animate-reveal-duration) var(--animate-reveal-ease);
+  }
+
+  .scroll-reveal.is-visible,
+  .scroll-reveal-left.is-visible,
+  .scroll-reveal-right.is-visible,
+  .scroll-scale-in.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  .scroll-fade-out {
+    animation: none;
+  }
+
+  .scrollytelling-panel {
+    animation: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .scrollytelling-panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ACCESSIBILITY: Reduced Motion
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right,
+  .scroll-scale-in,
+  .scrollytelling-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .parallax-layer-bg,
+  .parallax-layer-mid {
+    transform: none !important;
+  }
+
+  .hero-blob {
+    animation: none !important;
+    opacity: 0.2 !important;
+  }
+}
+
+/* ── Mobile responsive: stack scrollytelling ──────────────── */
+@media (max-width: 768px) {
+  .scrollytelling {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .scrollytelling-media {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 50vh;
+  }
+
+  .scrollytelling-panels {
+    padding: 40px 20px;
+  }
+
+  .scrollytelling-panel {
+    min-height: auto;
+    padding: 30px 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CATEGORY FILTER
+   ══════════════════════════════════════════════════════════════ */
+
+.category-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  padding: 6px;
+  border-radius: 100px;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-btn:hover {
+  color: #cbd5e1;
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.35);
+}
+
+/* Product card filter transitions */
+.product-card {
+  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease;
+}
+
+.product-card.card-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .category-filter {
+    border-radius: 16px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .category-btn {
+    font-size: 11px;
+    padding: 6px 14px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REVIEWS & RATINGS
+   ══════════════════════════════════════════════════════════════ */
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.rating-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: #f59e0b;
+  /* Amber 500 */
+}
+
+.rating-stars svg.empty {
+  fill: #334155;
+  /* Slate 700 */
+}
+
+.rating-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-brand-accent);
+  margin-left: 4px;
+}
+
+.rating-count {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-left: 6px;
+}
+
+#expert-reviews {
+  background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.05) 0%, transparent 70%);
+}
+
+.expert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.review-card {
+  padding: 32px;
+  border-radius: 24px;
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.review-quote {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin-bottom: 24px;
+}
+
+.review-source {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.source-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: white;
+  letter-spacing: -0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.source-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #f1f5f9;
+}
+
+.source-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #38bdf8;
+}
+
+@media (max-width: 992px) {
+  .expert-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
